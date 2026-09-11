@@ -1,0 +1,133 @@
+/* ==========================================================================
+   TRIO — Design Tokens
+   Valores RGB, para uso digital. A paleta CMYK/Pantone e exclusiva de
+   impresso e esta documentada em manual/manual-de-marca.md.
+
+   Importar fonts/fontes.css ANTES deste arquivo, senao as familias
+   declaradas em --trio-fonte-* caem no fallback do sistema.
+   ========================================================================== */
+
+:root {
+  /* ---------- Cor: institucional ---------- */
+  --trio-bordo: #510303;
+  --trio-bege: #F9F8F4;
+  --trio-cinza: #BFB8AF;
+  --trio-preto: #231D1A;
+  --trio-branco: #FFFFFF;
+
+  /* ---------- Cor: papeis semanticos ---------- */
+  --trio-fundo: var(--trio-bege);
+  --trio-texto: var(--trio-preto);
+  --trio-texto-suave: rgba(35, 29, 26, 0.72);
+  --trio-titulo: var(--trio-bordo);
+  --trio-superficie: var(--trio-cinza);
+  --trio-divisoria: rgba(35, 29, 26, 0.14);
+
+  /* CTA permanece bordo em todos os temas, para que o elemento de conversao
+     nao mude de cor entre as paginas dos diferentes espacos. */
+  --trio-acao: var(--trio-bordo);
+  --trio-acao-texto: var(--trio-bege);
+
+  /* Accent do espaco. O padrao e o bordo institucional; cada tema sobrescreve. */
+  --trio-accent: var(--trio-bordo);
+
+  /* ---------- Tipografia ---------- */
+  --trio-fonte-titulo: "Miller Headline", "Times New Roman", serif;
+  --trio-fonte-texto: "General Sans", system-ui, sans-serif;
+  --trio-fonte-mono: "Chivo Mono", ui-monospace, monospace;
+
+  --trio-fs-display: 5.5rem;   /* 88px */
+  --trio-fs-h1: 3.5rem;        /* 56px */
+  --trio-fs-h2: 2.25rem;       /* 36px */
+  --trio-fs-h3: 1.5rem;        /* 24px */
+  --trio-fs-body: 1.125rem;    /* 18px */
+  --trio-fs-label: 0.8125rem;  /* 13px */
+
+  --trio-lh-titulo: 1.08;
+  --trio-lh-texto: 1.6;
+
+  --trio-ls-titulo: -0.01em;
+  --trio-ls-label: 0.08em;     /* overlines e eyebrow em caixa alta */
+
+  /* ---------- Espacamento: base 8 ---------- */
+  --trio-esp-1: 0.25rem;   /*   4px */
+  --trio-esp-2: 0.5rem;    /*   8px */
+  --trio-esp-3: 1rem;      /*  16px */
+  --trio-esp-4: 1.5rem;    /*  24px */
+  --trio-esp-5: 2rem;      /*  32px */
+  --trio-esp-6: 3rem;      /*  48px */
+  --trio-esp-7: 4rem;      /*  64px */
+  --trio-esp-8: 6rem;      /*  96px */
+  --trio-esp-9: 8rem;      /* 128px */
+
+  --trio-secao-y: var(--trio-esp-9);
+
+  /* ---------- Layout ---------- */
+  --trio-container: 1280px;
+  --trio-gutter: var(--trio-esp-4);
+  --trio-colunas: 12;
+
+  /* ---------- Forma ----------
+     A marca comunica forca por elegancia e contencao. Cantos arredondados
+     descaracterizam o sistema: maximo 2px. */
+  --trio-raio: 0px;
+  --trio-raio-sutil: 2px;
+  --trio-borda: 1px;
+
+  /* ---------- Movimento ----------
+     Discreto, coerente com o valor "excelencia discreta". */
+  --trio-dur: 240ms;
+  --trio-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ---------- Logotipo ----------
+     Area de respiro = 50% da altura do logo, em todos os lados. */
+  --trio-logo-respiro: 0.5;
+}
+
+/* ==========================================================================
+   Temas por espaco
+   O accent identifica o espaco (marcadores de secao, fundos de bloco,
+   filetes). A assinatura do espaco entra em branco sobre esse fundo.
+   Uso: <body data-espaco="garden">
+   ========================================================================== */
+
+[data-espaco="pergola"]      { --trio-accent: #937F70; }
+[data-espaco="one"]          { --trio-accent: #ABAEAB; }
+[data-espaco="garden"]       { --trio-accent: #354C2C; }
+[data-espaco="river-one"]    { --trio-accent: #79776A; }
+[data-espaco="sky-lounge"]   { --trio-accent: #3E4A54; }
+[data-espaco="dezenove"]     { --trio-accent: #253746; }
+[data-espaco="metropolitan"] { --trio-accent: #636968; }
+[data-espaco="sp-hall"]      { --trio-accent: #67604B; }
+[data-espaco="terraco"]      { --trio-accent: #C6A992; }
+[data-espaco="trivento"]     { --trio-accent: #67604B; }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --trio-fs-display: 2.75rem; /* 44px */
+    --trio-fs-h1: 2.125rem;     /* 34px */
+    --trio-fs-h2: 1.625rem;     /* 26px */
+    --trio-fs-h3: 1.25rem;      /* 20px */
+    --trio-fs-body: 1rem;       /* 16px */
+    --trio-secao-y: var(--trio-esp-7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --trio-dur: 1ms; }
+}
+
+/* ==========================================================================
+   Acessibilidade — restricoes de contraste
+
+   --trio-cinza (#BFB8AF) sobre --trio-bege (#F9F8F4) rende cerca de 1,5:1.
+   Serve como superficie e divisoria, nunca como cor de texto ou placeholder.
+   Para placeholder, usar --trio-texto-suave.
+
+   Texto branco sobre o accent do Terraco (#C6A992) rende cerca de 2:1.
+   Sobre accents claros (Terraco, One, Pergola), usar --trio-preto.
+   ========================================================================== */
